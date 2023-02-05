@@ -26,11 +26,29 @@ class Program {
         }
 
         Console.WriteLine($"Результат: {resultString}");
+
+        Dictionary<char, int> symbolCounts = Program.SymbolCounts(resultString);
+        Console.WriteLine("Соответствие символа и количества его повторений в результирующей строке:");
+        foreach (KeyValuePair<char, int> kv in symbolCounts)
+            Console.WriteLine($"{kv.Key} - {kv.Value}");
     }
 
     private static string Reverse(string inputString) {
         char[] reversedString = inputString.ToCharArray();
         Array.Reverse(reversedString);
         return new string(reversedString);
+    }
+
+    private static Dictionary<char, int> SymbolCounts(string inputString) {
+        Dictionary<char, int> result = new Dictionary<char, int>();
+        
+        foreach (char c in inputString) {
+            if (result.ContainsKey(c))
+                result[c]++;
+            else
+                result[c] = 1;
+        }
+
+        return result;
     }
 }
