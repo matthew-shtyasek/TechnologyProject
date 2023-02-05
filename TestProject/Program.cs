@@ -1,5 +1,6 @@
 ﻿
 using System.Text;
+using System.Text.RegularExpressions;
 
 class Program {
 
@@ -7,6 +8,14 @@ class Program {
         Console.Write("Введите строку: ");
         string inputString = Console.ReadLine();
         string resultString;
+
+        Regex regex = new Regex(@"^[a-z]*$");
+
+        if (!regex.Match(inputString).Success) {
+            Console.WriteLine("Введены некорректные данные!\n" +
+                "Программа принимает только буквы латинского алфавита в нижнем регистре (a-z).");
+            return;
+        }
 
         if (inputString.Length % 2 == 0) { 
             string leftSubstring = Program.Reverse(inputString.Substring(0, inputString.Length / 2));
